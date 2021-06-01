@@ -78,11 +78,8 @@ st.write("""
 # Explore itemsets
 Select an antecendent and a consequent and examine the itemset""")
 
-# Add a column with the length
-# frequent_itemsets['length'] = frequent_itemsets['itemsets'].apply(lambda x: len(x))
-
-antecedents = st.selectbox("Select an antecedents",all_prodfam)
-consequents = st.selectbox("Select a consequents",all_prodfam)
+antecedents = st.selectbox("Select an antecedents",all_prodfam,3)
+consequents = st.selectbox("Select a consequents",all_prodfam,9)
 
 st.write("antecedent chosen",antecedents)
 st.write("consequent chosen",consequents)
@@ -92,13 +89,9 @@ def get_rules(antecedents, consequents):
     #st.write("=====================================")
     st.write("Support: " + str(list(var['support'])[0]))
     st.write("Rule: With Product ID " + str(antecedents) + " customer also purchase Product ID " + str(consequents))
-    # second index of the inner list
-    # third index of the list located at 0th
-    # of the third index of the inner list
 
     st.write("Confidence: " + str(list(var['confidence'])[0]))
     st.write("Lift: " + str(list(var['lift'])[0]))
-    st.write("=====================================")
 
 try:
     get_rules(antecedents,consequents)
