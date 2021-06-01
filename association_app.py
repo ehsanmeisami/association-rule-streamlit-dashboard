@@ -46,7 +46,7 @@ def family_or_category(select_prod_fam):
 
     fam_df = fam_df.groupby(['Date',select_prod_fam])['Sell-out units'].sum().reset_index()
     fam_df.drop(columns=['Sell-out units'],inplace=True)
-    all_prodfam = list(fam_df[select_prod_fam].unique())
+    all_prodfam = sorted(list(fam_df[select_prod_fam].unique()))
 
     # Pivot the data - lines as orders and products as columns
     fam_pt = pd.pivot_table(fam_df, index='Date', columns=select_prod_fam, 
