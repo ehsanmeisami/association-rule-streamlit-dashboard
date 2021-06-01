@@ -1,5 +1,6 @@
 numpy==1.19.5
 pandas==1.1.2
 streamlit==0.82.0
-mlxtend==0.18.0
+mlxtend.frequent_patterns==0.18.0
 mock==2.0.0
+
