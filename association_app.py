@@ -78,8 +78,8 @@ st.write("""
 # Explore itemsets
 Select an antecendent and a consequent and examine the itemset""")
 
-antecedents = st.selectbox("Select an antecedents",all_prodfam,3)
-consequents = st.selectbox("Select a consequents",all_prodfam,9)
+antecedents = st.selectbox("Select an antecedents",all_prodfam,13)
+consequents = st.selectbox("Select a consequents",all_prodfam,16)
 
 st.write("antecedent chosen",antecedents)
 st.write("consequent chosen",consequents)
