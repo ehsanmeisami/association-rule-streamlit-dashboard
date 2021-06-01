@@ -3,3 +3,4 @@ pandas==1.1.2
 streamlit==0.82.0
 mlxtend.frequent_patterns==0.18.0
 mock==2.0.0
+apyori==1.1.2
