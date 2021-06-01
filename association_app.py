@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pathlib
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
 
@@ -10,14 +9,8 @@ st.write("""
 Get rules for Product Family and Product Category based on Point-of-Sales, Year and Quarter of the corresponding year""")
 st.write("---")
 
-
-#project_path = pathlib.Path(__file__).parent.absolute()
-
 df = pd.read_csv('association_rule_data.csv', index_col=0)
 df['Date'] = pd.to_datetime(df['Date'])
-
-# st.write(df.head())
-# st.write(df.shape)
 
 # ===================================================
 
@@ -48,7 +41,7 @@ Choose a granuality, a metric and a minimum threshold to generate rules""")
 select_prod_fam = st.selectbox("Association based on Product Family or Product Category [granuality]", ("ProductFamily_ID","ProductCategory_ID"))
 
 
-def test(select_prod_fam):
+def family_or_category(select_prod_fam):
     fam_df = df.copy()
 
     fam_df = fam_df.groupby(['Date',select_prod_fam])['Sell-out units'].sum().reset_index()
@@ -61,7 +54,7 @@ def test(select_prod_fam):
     
     return fam_pt, all_prodfam
 
-cat_fam_df, all_prodfam = test(select_prod_fam=select_prod_fam)
+cat_fam_df, all_prodfam = family_or_category(select_prod_fam=select_prod_fam)
 
 # Apply the APRIORI algorithm to get frequent itemsets
 # Rules supported in at least 5% of the transactions (more info at http://rasbt.github.io/mlxtend/user_guide/frequent_patterns/apriori/)
