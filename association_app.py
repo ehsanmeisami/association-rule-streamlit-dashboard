@@ -41,23 +41,31 @@ st.write("Dataframe shape:",df.shape)
 
 st.write("---")
 
-fam_df = df.copy()
+st.write("""
+# Generate rules by conditions
+Choose a granuality, a metric and a minimum threshold to generate rules""")
 
-fam_df = fam_df.groupby(['Date','ProductFamily_ID'])['Sell-out units'].sum().reset_index()
-fam_df.drop(columns=['Sell-out units'],inplace=True)
-all_prodfam = list(fam_df['ProductFamily_ID'].unique())
+select_prod_fam = st.selectbox("Association based on Product Family or Product Category [granuality]", ("ProductFamily_ID","ProductCategory_ID"))
 
-# Pivot the data - lines as orders and products as columns
-fam_pt = pd.pivot_table(fam_df, index='Date', columns='ProductFamily_ID', 
-                    aggfunc=lambda x: 1 if len(x)>0 else 0).fillna(0)
+
+def test(select_prod_fam):
+    fam_df = df.copy()
+
+    fam_df = fam_df.groupby(['Date',select_prod_fam])['Sell-out units'].sum().reset_index()
+    fam_df.drop(columns=['Sell-out units'],inplace=True)
+    all_prodfam = list(fam_df[select_prod_fam].unique())
+
+    # Pivot the data - lines as orders and products as columns
+    fam_pt = pd.pivot_table(fam_df, index='Date', columns=select_prod_fam, 
+                        aggfunc=lambda x: 1 if len(x)>0 else 0).fillna(0)
+    
+    return fam_pt, all_prodfam
+
+cat_fam_df, all_prodfam = test(select_prod_fam=select_prod_fam)
 
 # Apply the APRIORI algorithm to get frequent itemsets
 # Rules supported in at least 5% of the transactions (more info at http://rasbt.github.io/mlxtend/user_guide/frequent_patterns/apriori/)
-frequent_itemsets = apriori(fam_pt, min_support=0.5, max_len = 2,use_colnames=True)
-
-st.write("""
-# Generate rules by conditions
-Choose a metric and a minimum threshold to generate rules""")
+frequent_itemsets = apriori(cat_fam_df, min_support=0.5, max_len = 2,use_colnames=True)
 
 
 # Generate the association rules - by lift
@@ -92,8 +100,6 @@ def get_rules(antecedents, consequents):
     st.write("Support: " + str(list(var['support'])[0]))
     st.write("Rule: With " + str(antecedents) + " customer also purchase " + str(consequents))
     # second index of the inner list
-    
-
     # third index of the list located at 0th
     # of the third index of the inner list
 
