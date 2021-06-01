@@ -110,4 +110,4 @@ def get_rules(antecedents, consequents):
 try:
     get_rules(antecedents,consequents)
 except IndexError:
-    st.write("There are no rules found for this specific itemset")
+    st.write("There are no rules found for this specific itemset, please you different antecedents or consequents")
