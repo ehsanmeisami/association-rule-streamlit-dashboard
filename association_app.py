@@ -11,9 +11,9 @@ Get rules for Product Family and Product Category based on Point-of-Sales, Year 
 st.write("---")
 
 
-project_path = pathlib.Path(__file__).parent.absolute()
+#project_path = pathlib.Path(__file__).parent.absolute()
 
-df = pd.read_csv(str(project_path) + '/association_rule_data.csv', index_col=0)
+df = pd.read_csv('association_rule_data.csv', index_col=0)
 df['Date'] = pd.to_datetime(df['Date'])
 
 # st.write(df.head())
