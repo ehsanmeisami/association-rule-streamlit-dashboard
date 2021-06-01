@@ -31,7 +31,7 @@ select_year = st.selectbox("Select YEAR", (year_ls))
 
 df = df.loc[(df['Point-of-Sale_ID'] == select_pos) & (df['Quarter'] == select_quarter) & (df['Year'] == select_year)]
 
-st.write("> You can maximize the dataframes shown by clicking on the expand button on top right")
+st.write("> You can maximize the dataframes shown by clicking on the expand button on the top right of the dataframe")
 st.write(df.head())
 
 st.write("POS chosen:", select_pos)
@@ -111,3 +111,7 @@ try:
     get_rules(antecedents,consequents)
 except IndexError:
     st.write("There are no rules found for this specific itemset, please you different antecedents or consequents")
+
+    
+    
+    
