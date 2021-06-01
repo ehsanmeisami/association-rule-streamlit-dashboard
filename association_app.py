@@ -98,7 +98,7 @@ def get_rules(antecedents, consequents):
     var = rulesLift[(rulesLift['antecedents'] == {antecedents}) & (rulesLift['consequents'] == {consequents})]
     #st.write("=====================================")
     st.write("Support: " + str(list(var['support'])[0]))
-    st.write("Rule: With " + str(antecedents) + " customer also purchase " + str(consequents))
+    st.write("Rule: With Product ID " + str(antecedents) + " customer also purchase Product ID " + str(consequents))
     # second index of the inner list
     # third index of the list located at 0th
     # of the third index of the inner list
