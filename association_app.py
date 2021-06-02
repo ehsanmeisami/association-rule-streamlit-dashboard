@@ -26,10 +26,7 @@ df = df.loc[(df['Point-of-Sale_ID'] == select_pos) & (df['Quarter'] == select_qu
 
 st.write("> You can maximize the dataframes shown by clicking on the expand button on the top right of the dataframe")
 
-agree = st.checkbox('Display dataframe')
-
-if agree:
-    st.write(df.head())
+st.write(df.head())
 
 
 st.write("POS chosen:", select_pos)
